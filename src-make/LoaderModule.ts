@@ -286,7 +286,7 @@ export class LoaderModule {
 		const braket = (item: any) => {
 			return ('['.bold + '').gray + item.bold + ((']'.gray + '').bold + '').reset
 		}
-		const info = braket(`${time.join('-')} ${time.join(':')}`) + ' ' + braket(level.toLowerCase()[
+		const info = braket(`${time.join('-')} ${time1.join(':')}`) + ' ' + braket(level.toLowerCase()[
 			level == 'info' ? 'blue' :
 				level == 'warn' ? 'yellow' :
 					level == 'error' ? 'red' :
