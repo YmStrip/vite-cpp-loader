@@ -17,16 +17,27 @@ const test = () => {
 ```cpp
 #include <napi.h>
 
-Napi::String Method(const Napi::CallbackInfo& info) {
+Napi::String Method(const Napi::CallbackInfo &info) {
 	Napi::Env env = info.Env();
 	return Napi::String::New(env, "world");
 }
-
+Napi::Number sum(const Napi::CallbackInfo &info) {
+	auto env = info.Env();
+	auto v0 = info[0].As<Napi::Number>().DoubleValue();
+	double a = 0;
+	for (int i = -1; ++i < v0;) {
+		a += i;
+	}
+	return Napi::Number::New(env, a);
+}
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
 	exports.Setting(Napi::String::New(env, "hello"),
-							Napi::Function::New(env, Method));
+	                Napi::Function::New(env, Method));
+	exports.Setting(Napi::String::New(env, "sum"),
+									Napi::Function::New(env, sum));
 	return exports;
 }
 
-NODE_API_MODULE(hello, Init)
+NODE_API_MODULE(hello, Init);
+
 ```
